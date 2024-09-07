@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.contenedorPeliculas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.contenedorPelicula {
+  display: flex;
+  flex-direction: column;
+  align-;
+}

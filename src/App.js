@@ -1,23 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import ContenedorPelicula from './components/ContenedorPelicula';
+
 
 function App() {
+
+  const [totalReactPackages, setTotalReactPackages] = useState([]);
+
+  useEffect(() => {
+      // GET request using fetch with error handling
+      fetch('http://localhost:3000/movies', {
+          headers: {
+              'Access-Control-Allow-Origin': '*'
+          }
+      })
+          .then(async response => {
+              const data = await response.json();
+  
+              // check for error response
+              if (!response.ok) {
+                  // get error message from body or default to response statusText
+                  const error = (data && data.message) || response.statusText;
+                  return Promise.reject(error);
+              }
+  
+              console.log(data)
+              setTotalReactPackages(data);
+          })
+          .catch(error => {
+              console.error('There was an error!', error.toString());
+          });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='contenedorPeliculas'>
+          {totalReactPackages && totalReactPackages.map((elemento, index) => (
+            <ContenedorPelicula key={index} Name={elemento.title} Genre={elemento.genre} FrontPage={elemento.frontPage} />
+          ))}
+      </div>
     </div>
   );
 }
