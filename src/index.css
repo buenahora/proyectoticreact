@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  padding: 20px;
 }
 
 code {
@@ -15,10 +17,25 @@ code {
 .contenedorPeliculas {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  width: 85%;
+  margin: auto;
+  row-gap: 20px;
+  column-gap: 50px;
 }
 
 .contenedorPelicula {
   display: flex;
   flex-direction: column;
-  align-;
+  justify-content: flex-end;
+  background-color: #f1f1f1;
+  height: 750px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.imagenPelicula {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  border-radius: 10px 10px 0 0;
 }
