@@ -1,0 +1,90 @@
+/* Estilos para la cabecera */
+.App-header {
+    background-color: #f0f0f0;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .App-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+
+  .App-header h2 {
+    font-size: 1.7rem;
+    color: #333;
+  }
+  
+  .App-header p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .reserve-button {
+    background-color: #6366f1;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white
+  }
+  
+  .reserve-button:hover {
+    background-color: #4f46e5;
+  }
+  
+  /* Sección de películas */
+  .movies-section {
+    padding: 40px;
+  }
+  
+  .movies-grid {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .movie-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 150px;
+  }
+  
+  /* Planes de membresía */
+  .membership-section {
+    padding: 40px;
+    background-color: #e9ecef;
+    text-align: center;
+  }
+  
+  .membership-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .membership-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .membership-button {
+    background-color: #6366f1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .membership-button:hover {
+    background-color:#4f46e5;
+  }
+  
