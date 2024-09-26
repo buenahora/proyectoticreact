@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Schedule.css';
 
 function Schedule() {
   const showtimes = [
@@ -7,12 +8,26 @@ function Schedule() {
     '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
   ];
 
+  // Estado para almacenar el showtime seleccionado
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  // Función para manejar la selección de showtime
+  const handleShowtimeClick = (time) => {
+    setSelectedTime(time);
+  };
+
   return (
     <div className="schedule-container">
       <h2>Today's Schedule</h2>
       <div className="showtimes">
         {showtimes.map((time, index) => (
-          <button key={index} className="showtime-button">{time}</button>
+          <button
+            key={index}
+            className={`showtime-button ${selectedTime === time ? 'selected' : ''}`}
+            onClick={() => handleShowtimeClick(time)}
+          >
+            {time}
+          </button>
         ))}
       </div>
     </div>

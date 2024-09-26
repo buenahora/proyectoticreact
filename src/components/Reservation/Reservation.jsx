@@ -3,6 +3,8 @@ import Schedule from './Schedule';
 import TicketSelector from './TicketSelector';
 import TotalCost from './TotalCost';
 import './Reservation.css';
+import { Link } from 'react-router-dom';
+
 
 export default function Reservation() {
   const [adultTickets, setAdultTickets] = useState(0);
@@ -10,6 +12,7 @@ export default function Reservation() {
   const [childTickets, setChildTickets] = useState(0);
   const [seniorTickets, setSeniorTickets] = useState(0);
 
+  // Precios de los tickets
   const ticketPrices = {
     adult: 500,
     student: 150,
@@ -17,13 +20,23 @@ export default function Reservation() {
     senior: 300,
   };
 
+  // Descuento especial por este mes
+  const [specialDiscount, setSpecialDiscount] = useState(true);
+
+  // Función para calcular el total
   const calculateTotal = () => {
-    return (
+    let total = 
       adultTickets * ticketPrices.adult +
       studentTickets * ticketPrices.student +
       childTickets * ticketPrices.child +
-      seniorTickets * ticketPrices.senior
-    );
+      seniorTickets * ticketPrices.senior;
+    
+    // Si el descuento está activo, establecer total a 0
+    if (specialDiscount) {
+      total = 0;
+    }
+
+    return total;
   };
 
   return (
@@ -31,10 +44,10 @@ export default function Reservation() {
       <header>
         <h1>WHAT THE FUN CINEMA</h1>
         <nav>
-          <button>Register</button>
-          <button>Log In</button>
-          <button>Showtimes</button>
-          <button>Reserve seats</button>
+        <Link to="/register"><button>Registro</button></Link>
+        <Link to="/login"><button>Log In</button></Link>
+          <button>Catálogo</button>
+        <Link to="/"><button>Home</button></Link>
         </nav>
       </header>
       <Schedule />
@@ -48,9 +61,10 @@ export default function Reservation() {
         seniorTickets={seniorTickets}
         setSeniorTickets={setSeniorTickets}
       />
+      <div className="discount-info">
+        {specialDiscount && <p>Descuento espacial aplicado: las entardas son gratis este mes!</p>}
+      </div>
       <TotalCost total={calculateTotal()} />
     </div>
   );
 }
-
-
