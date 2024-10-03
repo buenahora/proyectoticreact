@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Schedule.css';
+import './Reservation';
 
 function Schedule() {
   const showtimes = [
