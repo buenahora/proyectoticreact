@@ -1,0 +1,100 @@
+.app-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  :root {
+    --color-background: #1a1a1a;
+    --color-form-background: #2a2a2a;
+    --color-input-background: #3a3a3a;
+    --color-border: #4a4a4a;
+    --color-text: #ffffff;
+    --color-text-secondary: #d1d5db;
+    --color-accent: #6366f1;
+    --color-accent-hover: #4f46e5;
+    --color-background-secondary: #dcdce2;
+  }
+  
+  header {
+    background-color: var(--color-form-background);
+    color: white;
+    padding: 1rem;
+  }
+  
+  nav button {
+    margin: 0 10px;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .showtimes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .showtime-button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .ticket-selector {
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  .ticket-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .ticket-type button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .total-cost {
+    margin: 20px;
+  }
+  
+  .confirm-button {
+    padding: 10px 20px;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .discount-info {
+    color: green;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+
+  nav button:hover {
+    background-color: var(--color-accent-hover); 
+  }
+  
+  .showtime-button:hover {
+    background-color: #ccc; 
+  }
+  
+  .ticket-type button:hover {
+    background-color: #bbb;
+  }
+  
+  .confirm-button:hover {
+    background-color: #4f46e5; 
+  }
+  
