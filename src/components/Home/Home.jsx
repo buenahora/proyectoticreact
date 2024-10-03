@@ -1,7 +1,21 @@
 import React from 'react';
 import './Home.css'; // Importamos los estilos
+import { useState, useEffect } from 'react';
+import ContenedorPelicula from '../ContenedorPelicula/ContenedorPelicula.jsx';
 
 function Home() {
+
+  const [movies, setMovies] = useState([]);
+  const [genre, setGenre] = useState("");
+
+
+  useEffect(() => {
+    fetch('http://localhost:3001/movies')
+      .then(response => response.json())
+      .then(data => setMovies(data))
+      .catch(error => console.error('Error fetching movies:', error));
+  }, []);
+
   return (
     <div className="App">
       {/* Cabecera de la página */}
@@ -16,11 +30,22 @@ function Home() {
       {/* Sección de películas */}
       <section className="movies-section">
         <h2>Busca tu pelicula favorita</h2>
+
+        <select onChange={(e) => setGenre(e.target.value)}>
+            <option value="">All Genres</option>
+            {Array.from(new Set(movies.map(movie => movie.genre))).map(genre => (
+              <option key={genre} value={genre}>{genre}</option>
+            ))}
+          </select>
+
         <div className="movies-grid">
           {/* Reemplaza con tus imágenes o componentes */}
-          <div className="movie-card">Movie 1</div>
-          <div className="movie-card">Movie 2</div>
-          <div className="movie-card">Movie 3</div>
+          {movies
+            .filter(movie => genre === "" || movie.genre === genre)
+            .map(movie => (
+              <ContenedorPelicula Name={movie.title} Genre={movie.genre} FrontPage={movie.frontPage} Id={movie.id} />
+            ))}
+
         </div>
       </section>
 

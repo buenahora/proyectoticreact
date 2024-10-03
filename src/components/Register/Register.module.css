@@ -18,7 +18,7 @@
   font-family: Arial, sans-serif;
 }
 
-.form-container {
+.formContainer {
   width: 100%;
   max-width: 400px;
   padding: 2rem;
@@ -27,7 +27,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.icon-container {
+.iconContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
@@ -61,21 +61,21 @@
   font-size: 1rem;
 }
 
-.remember-forgot {
+.rememberForgot {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
 }
 
-.remember-me {
+.rememberMe {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--color-text-secondary);
 }
 
-.forgot-password {
+.forgotPassword {
   color: var(--color-accent);
   text-decoration: none;
 }
@@ -107,7 +107,7 @@
   text-decoration: none;
 }
 
-.login-link {
+.loginLink {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   text-align: center;
