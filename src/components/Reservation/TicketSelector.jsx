@@ -9,36 +9,36 @@ function TicketSelector({
   return (
     <div className="ticket-selector">
       <div className="ticket-type">
-        <span>Adult Ticket (Age 15+): $500</span>
+        <span>Ticket Adulto (15+ años): $500</span>
         <div>
-          <button onClick={() => setAdultTickets(adultTickets - 1)}>-</button>
+          <button onClick={() => adultTickets>0 && setAdultTickets(adultTickets - 1)} disabled={adultTickets==0}>-</button>
           <span>{adultTickets}</span>
           <button onClick={() => setAdultTickets(adultTickets + 1)}>+</button>
         </div>
       </div>
 
       <div className="ticket-type">
-        <span>Student Ticket: $150</span>
+        <span> Ticket Estudiante: $150</span>
         <div>
-          <button onClick={() => setStudentTickets(studentTickets - 1)}>-</button>
+          <button onClick={() => studentTickets > 0 && setStudentTickets(studentTickets - 1)}disabled={studentTickets === 0}>-</button>
           <span>{studentTickets}</span>
           <button onClick={() => setStudentTickets(studentTickets + 1)}>+</button>
         </div>
       </div>
 
       <div className="ticket-type">
-        <span>Child Ticket (Under 15): $70</span>
+        <span>Ticket Infante(Menores a 15): $70</span>
         <div>
-          <button onClick={() => setChildTickets(childTickets - 1)}>-</button>
+          <button onClick={() =>childTickets>0 && setChildTickets(childTickets - 1)} disabled={childTickets==0}>-</button>
           <span>{childTickets}</span>
           <button onClick={() => setChildTickets(childTickets + 1)}>+</button>
         </div>
       </div>
 
       <div className="ticket-type">
-        <span>Senior Ticket (Age 65+): $300</span>
+        <span>Ticket Jubilados(65+ años): $300</span>
         <div>
-          <button onClick={() => setSeniorTickets(seniorTickets - 1)}>-</button>
+          <button onClick={() =>seniorTickets>0 && setSeniorTickets(seniorTickets - 1)} disabled={seniorTickets==0}>-</button>
           <span>{seniorTickets}</span>
           <button onClick={() => setSeniorTickets(seniorTickets + 1)}>+</button>
         </div>
