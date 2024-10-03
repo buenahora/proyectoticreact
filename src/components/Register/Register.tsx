@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 
 export default function CinemaRegister() {
   const navigate = useNavigate();
+  
 
   const [fullName, setFullName] = useState(''); // Nuevo estado para el nombre
   const [email, setEmail] = useState(''); // Nuevo estado para el email

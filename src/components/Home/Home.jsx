@@ -18,9 +18,18 @@ function Home() {
   }, []);
 
   return (
+    <>
     <div className="App">
       {/* Cabecera de la página */}
       <header className="App-header">
+      <div className='background_image'></div>
+      <div className='data'>
+        <h1 className="App-title">WTF</h1>
+        <h2 className="App-subtitle">What The Fun Cinema</h2>
+          <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
+          <p>Compra tu entrada ahora</p>
+          <button className="reserve-button">Reservar ahora</button>
+        </div>
       <h1 className="App-title">WTF</h1>
       <h2 className="App-subtitle">What The Fun Cinema</h2>
         <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
@@ -30,7 +39,7 @@ function Home() {
         </Link>
       </header>
 
-      {/* Sección de películas */}
+
       <section className="movies-section">
         <label htmlFor="genere-select">Selecciona tu pelicula favorita:</label>
         <select onChange={(e) => setGenre(e.target.value)}>
@@ -51,7 +60,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Planes de membresía */}
       <section className="membership-section">
         <h2>Elige tu membresia</h2>
         <div className="membership-options">
@@ -83,6 +91,7 @@ function Home() {
       </section>
     </div>
 
+    </>
     
   );
 }
