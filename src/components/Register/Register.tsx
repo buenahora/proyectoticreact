@@ -92,7 +92,7 @@ export default function CinemaRegister() {
             placeholder="Confirm Password"
             className={styles.input}
             value={confirmPassword} 
-            onChange={handleConfirmPasswordChange} +
+            onChange={handleConfirmPasswordChange} 
             required
           />
           {error && <p className={styles.error}>{error}</p>} {/* Mostrar error si hay */}
