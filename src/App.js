@@ -6,13 +6,21 @@ import Login from './components/Login/Login.tsx';
 import Register from './components/Register/Register.tsx';
 import Reservation from './components/Reservation/Reservation.jsx';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-function App() {
-  //Llamada a la API para mostrar todas las peliculas, 
-  //se llama unicamente la primera vez que se carga la pagina
+export default function App() {
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
   return (
-    <Router>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,7 +31,6 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
-
-export default App;

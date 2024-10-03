@@ -16,7 +16,7 @@ const ContenedorPelicula = (props) => {
 
     return (
         <div className={styles.contenedorPelicula} onClick={handleClick} id={Id}>
-            <img src={FrontPage} alt="Front Page" className={styles.imagenPelicula}/>
+            <img src={"data:image/png;base64, "+FrontPage} alt="Front Page" className={styles.imagenPelicula}/>
             <h1 className={styles.title}>{Name}</h1> 
             <p className={styles.genre}>{Genre}</p>
         </div>

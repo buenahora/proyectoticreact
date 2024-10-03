@@ -5,6 +5,7 @@ import styles from './Register.module.css';
 export default function CinemaRegister() {
 
   const navigate = useNavigate();
+  
 
   return (
     <div className={styles.container}>

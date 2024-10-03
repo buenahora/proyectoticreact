@@ -17,17 +17,21 @@ function Home() {
   }, []);
 
   return (
+    <>
     <div className="App">
       {/* Cabecera de la página */}
       <header className="App-header">
-      <h1 className="App-title">WTF</h1>
-      <h2 className="App-subtitle">What The Fun Cinema</h2>
-        <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
-        <p>Compra tu entrada ahora</p>
-        <button className="reserve-button">Reservar ahora</button>
+      <div className='background_image'></div>
+      <div className='data'>
+        <h1 className="App-title">WTF</h1>
+        <h2 className="App-subtitle">What The Fun Cinema</h2>
+          <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
+          <p>Compra tu entrada ahora</p>
+          <button className="reserve-button">Reservar ahora</button>
+        </div>
       </header>
 
-      {/* Sección de películas */}
+
       <section className="movies-section">
         <h2>Busca tu pelicula favorita</h2>
 
@@ -49,7 +53,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Planes de membresía */}
       <section className="membership-section">
         <h2>Elige tu membresia</h2>
         <div className="membership-options">
@@ -77,6 +80,7 @@ function Home() {
       </section>
     </div>
 
+    </>
     
   );
 }
