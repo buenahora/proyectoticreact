@@ -3,8 +3,6 @@ import Schedule from './Schedule';
 import TicketSelector from './TicketSelector';
 import TotalCost from './TotalCost';
 import './Reservation.css';
-import { Link } from 'react-router-dom';
-
 
 export default function Reservation() {
   const [adultTickets, setAdultTickets] = useState(0);
@@ -22,22 +20,25 @@ export default function Reservation() {
 
   // Descuento especial por este mes
   const [specialDiscount, setSpecialDiscount] = useState(true);
+  const discountPercentage = 100; // Descuento del 100%
 
-  // Función para calcular el total
+  // Función para calcular el total sin descuento
   const calculateTotal = () => {
-    let total = 
+    return (
       adultTickets * ticketPrices.adult +
       studentTickets * ticketPrices.student +
       childTickets * ticketPrices.child +
-      seniorTickets * ticketPrices.senior;
-    
-    // Si el descuento está activo, establecer total a 0
-    if (specialDiscount) {
-      total = 0;
-    }
-
-    return total;
+      seniorTickets * ticketPrices.senior
+    );
   };
+
+  // Función para calcular el total con descuento
+  const calculateDiscountedTotal = (total) => {
+    return total - total * (discountPercentage / 100);
+  };
+
+  const total = calculateTotal();
+  const discountedTotal = specialDiscount ? calculateDiscountedTotal(total) : total;
 
   return (
     <div className="app-container">
@@ -55,7 +56,11 @@ export default function Reservation() {
       <div className="discount-info">
         {specialDiscount && <p>Descuento espacial aplicado: las entardas son gratis este mes!</p>}
       </div>
-      <TotalCost total={calculateTotal()} />
+      <div className="cost-info">
+        <p>Costo total antes del descuento: ${total}</p>
+      </div>
+      {/* Pasamos el total con descuento al componente TotalCost */}
+      <TotalCost total={discountedTotal} />
     </div>
   );
 }
