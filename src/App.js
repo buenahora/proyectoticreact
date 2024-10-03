@@ -5,6 +5,7 @@ import Home from './components/Home/Home.jsx';
 import Login from './components/Login/Login.tsx';
 import Register from './components/Register/Register.tsx';
 import Reservation from './components/Reservation/Reservation.jsx';
+import NavBar from './components/NavBar/NavBar.jsx';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -22,6 +23,7 @@ export default function App() {
       <CssBaseline />
       <Router>
       <div className="App">
+      <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

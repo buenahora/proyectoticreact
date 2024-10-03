@@ -74,6 +74,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
   }
 
   .discount-info {
@@ -82,9 +83,7 @@
     margin: 20px 0;
   }
 
-  nav button:hover {
-    background-color: var(--color-accent-hover); 
-  }
+ 
   
   .showtime-button:hover {
     background-color: #ccc; 
@@ -97,4 +96,11 @@
   .confirm-button:hover {
     background-color: #4f46e5; 
   }
+
+  .cost-info p {
+    font-size: 18px;           
+    color: #4f46e5;               
+    margin: 10px 0;            
+  }
+  
   
