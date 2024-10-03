@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Asegúrate de importar useState
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 import bcrypt from 'bcryptjs';
@@ -42,13 +42,12 @@ export default function CinemaRegister() {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     setHash(hashedPassword);
 
-    // Aquí puedes enviar la contraseña hasheada al servidor junto con el email y el nombre
+    
     console.log('Hashed Password:', hashedPassword);
     console.log('Full Name:', fullName);
     console.log('Email:', email);
 
-    // Aquí podrías realizar una llamada al servidor para registrar al usuario
-    // e.g. await registerUser(fullName, email, hashedPassword);
+    
 
     setError(''); 
     navigate('/login'); 
@@ -63,7 +62,7 @@ export default function CinemaRegister() {
           </svg>
         </div>
         <h2 className={styles.title}>Create your account</h2>
-        <form className={styles.form} onSubmit={handleSubmit}> {/* Agregamos onSubmit aquí */}
+        <form className={styles.form} onSubmit={handleSubmit}> {/* onSubmit */}
           <input
             type="text"
             placeholder="Full Name"
@@ -76,24 +75,24 @@ export default function CinemaRegister() {
             type="email"
             placeholder="Email address"
             className={styles.input}
-            value={email} // Vinculando el valor
-            onChange={handleEmailChange} // Vinculando el evento
+            value={email} 
+            onChange={handleEmailChange} 
             required
           />
           <input
             type="password"
             placeholder="Password"
             className={styles.input}
-            value={password} // Vinculando el valor
-            onChange={handlePasswordChange} // Vinculando el evento
+            value={password} 
+            onChange={handlePasswordChange} 
             required
           />
           <input
             type="password"
             placeholder="Confirm Password"
             className={styles.input}
-            value={confirmPassword} // Vinculando el valor
-            onChange={handleConfirmPasswordChange} // Vinculando el evento
+            value={confirmPassword} 
+            onChange={handleConfirmPasswordChange} +
             required
           />
           {error && <p className={styles.error}>{error}</p>} {/* Mostrar error si hay */}
