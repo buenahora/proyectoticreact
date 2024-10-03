@@ -41,15 +41,6 @@ export default function Reservation() {
 
   return (
     <div className="app-container">
-      <header>
-        <h1>WHAT THE FUN CINEMA</h1>
-        <nav>
-        <Link to="/register"><button>Registro</button></Link>
-        <Link to="/login"><button>Log In</button></Link>
-          <button>Catálogo</button>
-        <Link to="/"><button>Home</button></Link>
-        </nav>
-      </header>
       <Schedule />
       <TicketSelector
         adultTickets={adultTickets}
