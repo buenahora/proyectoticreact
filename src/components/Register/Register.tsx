@@ -7,15 +7,53 @@ export default function CinemaRegister() {
   const navigate = useNavigate();
   
 
-  const [fullName, setFullName] = useState(''); // Nuevo estado para el nombre
-  const [email, setEmail] = useState(''); // Nuevo estado para el email
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState('Franco Buenahora'); // Nuevo estado para el nombre
+  const [email, setEmail] = useState('buenahorafranco@gmail.com'); // Nuevo estado para el email
+  const [password, setPassword] = useState('passwd');
+  const [confirmPassword, setConfirmPassword] = useState('passwd');
   const [hash, setHash] = useState('');
   const [error, setError] = useState('');
 
+  const handleRegister = async () => {
+
+    const [name, lastName] = fullName.split(" ");
+    try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json', // Add this line if your server expects it
+        },
+        body: JSON.stringify({
+          name,
+          lastName,
+          mail: email,
+          password: hash,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Network response was not ok');
+      }
+
+      const data = await response.json();
+      
+      // console.log('Registration successful:', data);
+      // setError(data.response);
+
+      navigate('/login')
+
+      // Navigate to another page or show success message
+    } catch (error) {
+      console.error('There was a problem with the registration:', error);
+      setError('Registration failed. Please try again.');
+    }
+  };
+
   const handleFullNameChange = (e) => {
     setFullName(e.target.value);
+
   };
 
   const handleEmailChange = (e) => {
@@ -39,20 +77,20 @@ export default function CinemaRegister() {
     }
 
     // Para hashear la contraseña
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password);
     setHash(hashedPassword);
-
-    
+    console.log("La passwd hasheada es " + hashedPassword);
     console.log('Hashed Password:', hashedPassword);
     console.log('Full Name:', fullName);
     console.log('Email:', email);
-
-    
-
-    setError(''); 
-    navigate('/login'); 
+    setError('');
   };
+
+  React.useEffect(() => {
+    if (hash) {
+      handleRegister();
+    }
+  }, [hash]);
 
   return (
     <div className={styles.container}>
