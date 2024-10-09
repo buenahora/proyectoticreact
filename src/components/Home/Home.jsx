@@ -24,12 +24,6 @@ function Home() {
       <header className="App-header">
       <div className='background_image'></div>
       <div className='data'>
-        <h1 className="App-title">WTF</h1>
-        <h2 className="App-subtitle">What The Fun Cinema</h2>
-          <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
-          <p>Compra tu entrada ahora</p>
-          <button className="reserve-button">Reservar ahora</button>
-        </div>
       <h1 className="App-title">WTF</h1>
       <h2 className="App-subtitle">What The Fun Cinema</h2>
         <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
@@ -37,7 +31,9 @@ function Home() {
         <Link to="/Reservation">
         <button className="reserve-button">Reservar ahora</button>
         </Link>
+        </div>
       </header>
+      
 
 
       <section className="movies-section">
