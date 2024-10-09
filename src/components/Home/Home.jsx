@@ -37,8 +37,7 @@ function Home() {
 
 
       <section className="movies-section">
-        <h2>Busca tu pelicula favorita</h2>
-
+        <label htmlFor="genere-select">Selecciona tu pelicula favorita:</label>
         <select onChange={(e) => setGenre(e.target.value)}>
             <option value="">All Genres</option>
             {Array.from(new Set(movies.map(movie => movie.genre))).map(genre => (

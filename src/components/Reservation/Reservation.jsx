@@ -9,6 +9,19 @@ export default function Reservation() {
   const [studentTickets, setStudentTickets] = useState(0);
   const [childTickets, setChildTickets] = useState(0);
   const [seniorTickets, setSeniorTickets] = useState(0);
+  const [selectedBarrio, setSelectedBarrio] = useState('');
+
+  // Lista de barrios
+  const barrios = [
+    'Punta Carretas',
+    'Ciudad Vieja',
+    'Pocitos',
+    'Carrasco',
+    'Tres Cruces',
+    'Centro',
+    'Malvín',
+    'Buceo',
+  ];
 
   // Precios de los tickets
   const ticketPrices = {
@@ -42,7 +55,28 @@ export default function Reservation() {
 
   return (
     <div className="app-container">
+      {/* Menú desplegable para seleccionar barrio */}
+      <div>
+        <label htmlFor="barrio-select">Selecciona un barrio:</label>
+        <select
+          id="barrio-select"
+          value={selectedBarrio}
+          onChange={(e) => setSelectedBarrio(e.target.value)}
+        >
+          <option value="">Seleccione...</option>
+          {barrios.map((barrio) => (
+            <option key={barrio} value={barrio}>
+              {barrio}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Muestra el barrio seleccionado */}
+      {selectedBarrio && <p>Barrio seleccionado: {selectedBarrio}</p>}
+
       <Schedule />
+
       <TicketSelector
         adultTickets={adultTickets}
         setAdultTickets={setAdultTickets}
@@ -54,11 +88,12 @@ export default function Reservation() {
         setSeniorTickets={setSeniorTickets}
       />
       <div className="discount-info">
-        {specialDiscount && <p>Descuento espacial aplicado: las entardas son gratis este mes!</p>}
+        {specialDiscount && <p>Descuento espacial aplicado: las entradas son gratis este mes!</p>}
       </div>
       <div className="cost-info">
         <p>Costo total antes del descuento: ${total}</p>
       </div>
+
       {/* Pasamos el total con descuento al componente TotalCost */}
       <TotalCost total={discountedTotal} />
     </div>

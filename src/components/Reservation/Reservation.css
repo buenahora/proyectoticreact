@@ -1,6 +1,7 @@
 .app-container {
     text-align: center;
     font-family: Arial, sans-serif;
+    margin-top: 20px;
   }
 
   :root {
@@ -102,5 +103,27 @@
     color: #4f46e5;               
     margin: 10px 0;            
   }
+
+  #barrio-select {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px; 
+  }
+
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  option {
+    padding: 10px; 
+  }
+
+ 
   
   
