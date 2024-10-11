@@ -5,7 +5,10 @@ const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
   const [selectedSeat, setSelectedSeat] = useState(null);
 
   const handleSeatClick = (row, col) => {
-    const seatId = `${String.fromCharCode(65 + row)}${col + 1}`;
+    // const seatId = `${String.fromCharCode(65 + row)}${col + 1}`;
+    const seatId = `${row+1}${col + 1}`;
+    console.log(seatId)
+
     if (!occupiedSeats.includes(seatId)) {
       setSelectedSeat({ row, col });
     }
@@ -15,7 +18,9 @@ const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
     const seats = [];
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        const seatId = `${String.fromCharCode(65 + i)}${j + 1}`;
+        const seatId = `${i+1}${j + 1}`;
+        const seatIdString = `${String.fromCharCode(65 + i)}${j + 1}`
+
         const isSelected = selectedSeat?.row === i && selectedSeat?.col === j;
         const isOccupied = occupiedSeats.includes(seatId);
         seats.push(
@@ -27,10 +32,10 @@ const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
           >
             <img 
               src={isOccupied ? "/asientoOcupado.svg" : isSelected ? "/asientoSeleccionado.svg" : "/asiento.svg"} 
-              alt={`Seat ${seatId}`} 
+              alt={`Seat ${seatIdString}`} 
               className={styles.seatImage} 
             />
-            <span className={styles.seatLabel}>{seatId}</span>
+            <span className={styles.seatLabel}>{seatIdString}</span>
           </button>
         );
       }

@@ -6,6 +6,7 @@ import Login from './components/Login/Login.tsx';
 import Register from './components/Register/Register.tsx';
 import Reservation from './components/Reservation/Reservation.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,9 +31,10 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
-          <Route path="/reservation/:functionId" element={<ReservationSeats />} />
+          <Route path="/reservation/:cinemaId/:functionId/:dateTime" element={<ReservationSeats />} />
 
         </Routes>
+        <Footer />
       </div>
     </Router>
     </ThemeProvider>
