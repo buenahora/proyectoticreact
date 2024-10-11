@@ -50,7 +50,7 @@ function Home() {
           {movies
             .filter(movie => genre === "" || movie.genre === genre)
             .map(movie => (
-              <ContenedorPelicula Name={movie.title} Genre={movie.genre} FrontPage={movie.frontPage} Id={movie.id} />
+              <ContenedorPelicula Name={movie.title} Genre={movie.genre} FrontPage={movie.frontPage} key ={movie.id} id={movie.id} movie={movie} />
             ))}
 
         </div>

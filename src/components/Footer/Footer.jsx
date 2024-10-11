@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.bottomBar}>
-        <p>&copy; 2023 Movie Booking. All rights reserved.</p>
+        <p>&copy; 2024 Movie Booking. All rights reserved.</p>
       </div>
     </footer>
   );
