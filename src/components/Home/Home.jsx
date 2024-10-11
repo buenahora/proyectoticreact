@@ -28,7 +28,7 @@ function Home() {
       <h2 className="App-subtitle">What The Fun Cinema</h2>
         <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
         <p>Compra tu entrada ahora</p>
-        <Link to="/Reservation">
+        <Link to="/reservation">
         <button className="reserve-button">Reservar ahora</button>
         </Link>
         </div>

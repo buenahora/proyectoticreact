@@ -9,6 +9,7 @@ import NavBar from './components/NavBar/NavBar.jsx';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import ReservationSeats from './components/ReservationSeats/ReservationSeats.jsx';
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
+          <Route path="/reservation/:functionId" element={<ReservationSeats />} />
 
         </Routes>
       </div>

@@ -7,16 +7,22 @@ export default function CinemaRegister() {
   const navigate = useNavigate();
   
 
-  const [fullName, setFullName] = useState('Franco Buenahora'); // Nuevo estado para el nombre
-  const [email, setEmail] = useState('buenahorafranco@gmail.com'); // Nuevo estado para el email
-  const [password, setPassword] = useState('passwd');
-  const [confirmPassword, setConfirmPassword] = useState('passwd');
+  const [fullName, setFullName] = useState(''); // Nuevo estado para el nombre
+  const [email, setEmail] = useState(''); // Nuevo estado para el email
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [hash, setHash] = useState('');
   const [error, setError] = useState('');
 
   const handleRegister = async () => {
 
     const [name, lastName] = fullName.split(" ");
+    console.log( JSON.stringify({
+      name,
+      lastName,
+      mail: email,
+      password: hash,
+    }))
     try {
       const response = await fetch('http://localhost:3001/users', {
         method: 'POST',
@@ -76,8 +82,14 @@ export default function CinemaRegister() {
       return;
     }
 
+    console.log("la password es "+password)
+
     // Para hashear la contraseña
-    const hashedPassword = await bcrypt.hash(password);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log("La passwd hasheada es " + hashedPassword);
+
+
     setHash(hashedPassword);
     console.log("La passwd hasheada es " + hashedPassword);
     console.log('Hashed Password:', hashedPassword);

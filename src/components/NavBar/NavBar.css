@@ -12,6 +12,10 @@
     
   }
 
+  .navbar a {
+    text-decoration: none;
+  }
+
   .navbar-links {
     display: flex;
     flex-wrap: wrap; 
@@ -21,6 +25,7 @@
     color: white;
     font-size: 24px;
     font-weight: bold;
+    text-decoration: none;
   }
   
   .navbar-links button {

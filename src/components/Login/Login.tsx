@@ -5,8 +5,8 @@ import bcrypt from 'bcryptjs';
 
 export default function CinemaLogin() {
 
-  const [email, setEmail] = useState('buenahorafranco@gmail.com'); // Nuevo estado para el email
-  const [password, setPassword] = useState('passwd');
+  const [email, setEmail] = useState(''); // Nuevo estado para el email
+  const [password, setPassword] = useState('');
   const [hash, setHash] = useState('');
   const [error, setError] = useState('');
 
