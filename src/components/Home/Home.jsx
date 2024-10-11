@@ -17,6 +17,12 @@ function Home() {
       .catch(error => console.error('Error fetching movies:', error));
   }, []);
 
+  const promotions = [
+    { id: 1, title: "Family Package", description: "Get 20% off when you buy 4 or more tickets", code: "FAMILY20" },
+    { id: 2, title: "Student Discount", description: "Students get 15% off with valid ID", code: "STUDENT15" },
+    { id: 3, title: "Matinee Special", description: "All shows before 5 PM are $2 off", code: "MATINEE2" },
+  ]
+
   return (
     <>
     <div className="App">
@@ -57,9 +63,9 @@ function Home() {
       </section>
 
       <section className="membership-section">
-        <h2>Elige tu membresia</h2>
+        {/* <h2>Elige tu membresia</h2> */}
         <div className="membership-options">
-          <div className="membership-card">
+          {/* <div className="membership-card">
             <h3>Standard</h3>
             <p>$800</p>
             <ul>
@@ -70,8 +76,8 @@ function Home() {
             <Link to="/Register">
             <button className="membership-button">Empieza gratis</button>
             </Link>
-          </div>
-          <div className="membership-card">
+          </div> */}
+          {/* <div className="membership-card">
             <h3>Premium</h3>
             <p>$2500</p>
             <ul>
@@ -82,7 +88,20 @@ function Home() {
             <Link to="/Register">
             <button className="membership-button">Empieza gratis</button>
             </Link>
-          </div>
+          </div> */}
+
+      <section className="promotionsSection">
+            <h2 className="sectionTitle">Special Offers</h2>
+            <div className="promotionsGrid">
+              {promotions.map((promo) => (
+                <div key={promo.id} className="promotionCard">
+                  <h3 className="promotionTitle">{promo.title}</h3>
+                  <p className="promotionDescription">{promo.description}</p>
+                  <span className="promotionCode">Use code: {promo.code}</span>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </section>
     </div>
