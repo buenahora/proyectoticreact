@@ -9,7 +9,7 @@ function TicketSelector({
   return (
     <div className="ticket-selector">
       <div className="ticket-type">
-        <span>Ticket Adulto (15+ años): $500</span>
+        <span>Adult Ticket (15+): $500</span>
         <div>
           <button onClick={() => adultTickets>0 && setAdultTickets(adultTickets - 1)} disabled={adultTickets===0}>-</button>
           <span>{adultTickets}</span>
@@ -18,7 +18,7 @@ function TicketSelector({
       </div>
 
       <div className="ticket-type">
-        <span> Ticket Estudiante: $150</span>
+        <span> Student Ticket: $150</span>
         <div>
           <button onClick={() => studentTickets > 0 && setStudentTickets(studentTickets - 1)}disabled={studentTickets === 0}>-</button>
           <span>{studentTickets}</span>
@@ -27,7 +27,7 @@ function TicketSelector({
       </div>
 
       <div className="ticket-type">
-        <span>Ticket Infante(Menores a 15): $70</span>
+        <span>Child Ticket(Menores a 15): $70</span>
         <div>
           <button onClick={() =>childTickets>0 && setChildTickets(childTickets - 1)} disabled={childTickets===0}>-</button>
           <span>{childTickets}</span>
@@ -36,7 +36,7 @@ function TicketSelector({
       </div>
 
       <div className="ticket-type">
-        <span>Ticket Jubilados(65+ años): $300</span>
+        <span>Senior Ticket(65+): $300</span>
         <div>
           <button onClick={() =>seniorTickets>0 && setSeniorTickets(seniorTickets - 1)} disabled={seniorTickets===0}>-</button>
           <span>{seniorTickets}</span>

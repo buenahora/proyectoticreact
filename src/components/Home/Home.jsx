@@ -32,10 +32,10 @@ function Home() {
       <div className='data'>
       <h1 className="App-title">WTF</h1>
       <h2 className="App-subtitle">What The Fun Cinema</h2>
-        <h1>¡Disfruta de las ultimas peliculas y reserva tu asiento!</h1>
-        <p>Compra tu entrada ahora</p>
+        <h1>Enoy the latest movies and reserve your seat!</h1>
+        <p>Buy your ticket now</p>
         <Link to="/reservation">
-        <button className="reserve-button">Reservar ahora</button>
+        <button className="reserve-button">Book your seat now</button>
         </Link>
         </div>
       </header>
@@ -43,8 +43,10 @@ function Home() {
 
 
       <section className="movies-section">
-        <label htmlFor="genere-select">Selecciona tu pelicula favorita:</label>
-        <select onChange={(e) => setGenre(e.target.value)}>
+        <label htmlFor="genere-select">Select you favorite movie:</label>
+        <select 
+        id="genere-select"
+        onChange={(e) => setGenre(e.target.value)}>
             <option value="">All Genres</option>
             {Array.from(new Set(movies.map(movie => movie.genre))).map(genre => (
               <option key={genre} value={genre}>{genre}</option>
