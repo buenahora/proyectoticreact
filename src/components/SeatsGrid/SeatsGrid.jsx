@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SeatsGrid.module.css';
 
-const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
-  const [selectedSeat, setSelectedSeat] = useState(null);
+const SeatsGrid = ({ rows = 15, cols = 10, occupiedSeats = [], selectedSeat, setSelectedSeat }) => {
 
   const handleSeatClick = (row, col) => {
     // const seatId = `${String.fromCharCode(65 + row)}${col + 1}`;
@@ -10,7 +9,9 @@ const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
     console.log(seatId)
 
     if (!occupiedSeats.includes(seatId)) {
-      setSelectedSeat({ row, col });
+      const seatIdString = `${String.fromCharCode(65 + row)}${col + 1}`
+      const seat = { row, col, seatId, seatIdString };
+      setSelectedSeat(seat);
     }
   };
 
@@ -20,9 +21,9 @@ const SeatsGrid = ({ rows = 5, cols = 8, occupiedSeats = [] }) => {
       for (let j = 0; j < cols; j++) {
         const seatId = `${i+1}${j + 1}`;
         const seatIdString = `${String.fromCharCode(65 + i)}${j + 1}`
-
         const isSelected = selectedSeat?.row === i && selectedSeat?.col === j;
         const isOccupied = occupiedSeats.includes(seatId);
+
         seats.push(
           <button
             key={`${i}-${j}`}

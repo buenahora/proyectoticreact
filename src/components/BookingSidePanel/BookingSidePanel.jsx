@@ -18,11 +18,12 @@ const BookingSidePanel = ({ movieTitle, functionTime, selectedSeat, price, onCon
         </div>
         <div className={styles.infoSection}>
           <h3 className={styles.infoTitle}>Selected Seat</h3>
-          <p className={styles.infoValue}>{selectedSeat || 'No seat selected'}</p>
+          <p className={styles.infoValue}>{selectedSeat ? selectedSeat.seatIdString : 'No seat selected'}</p>
+
         </div>
         <div className={styles.infoSection}>
           <h3 className={styles.infoTitle}>Price</h3>
-          <p className={styles.infoValue}>${price}</p>
+          <p className={styles.infoValue}>{price}</p>
         </div>
       </div>
       <div className={styles.cardFooter}>
