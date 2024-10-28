@@ -13,6 +13,7 @@ const ReservationSeats = () => {
     const [seats, setSeats] = useState([]);
     const [numRoom, setNumRoom] = useState(null);
     const [func, setFunction] = useState(null);
+    const [status, setStatus] = useState("");
 
     const [selectedSeat, setSelectedSeat] = useState(null);
     
@@ -46,8 +47,16 @@ const ReservationSeats = () => {
     
                 fetch("http://localhost:3001/reservation", requestOptions)
                 .then((response) => response.text())
-                .then((result) => console.log(result))
-                .catch((error) => console.error(error));
+                .then((result) => {
+                    setSelectedSeat(null)
+                    setStatus(result)
+                    fetchSeats()    
+                })
+                .catch((error) => {
+                    setSelectedSeat(null)
+                    console.error('Error:', error)
+                    setStatus(error)
+                });
 
             } else {
                 console.error('No seat selected');
@@ -59,30 +68,31 @@ const ReservationSeats = () => {
         }
     };
 
+    const fetchSeats = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3001/seats`, {
+                params: {
+                    numRoom: numRoom,
+                    cinemaId,
+                    datetime: dateTime
+                }
+            });
+
+            console.log(response.data)
+
+            let occupiedSeats = []
+            response.data.forEach(seat => {
+                occupiedSeats.push(seat.join(''))
+            });
+            console.log(occupiedSeats)
+            setSeats(occupiedSeats);
+           
+        } catch (error) {
+            console.error('Error fetching seats:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchSeats = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3001/seats`, {
-                    params: {
-                        numRoom: numRoom,
-                        cinemaId,
-                        datetime: dateTime
-                    }
-                });
-
-                console.log(response.data)
-
-                let occupiedSeats = []
-                response.data.forEach(seat => {
-                    occupiedSeats.push(seat.join(''))
-                });
-                console.log(occupiedSeats)
-                setSeats(occupiedSeats);
-               
-            } catch (error) {
-                console.error('Error fetching seats:', error);
-            }
-        };
 
         const fetchMovieData = async () => {
 
@@ -129,6 +139,7 @@ const ReservationSeats = () => {
           selectedSeat={selectedSeat}
           price={"Free"}
           onContinue={handleContinue}
+          status={status}
         />
       </div>
     </div>

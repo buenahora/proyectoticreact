@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './BookingSidePanel.module.css';
 
-const BookingSidePanel = ({ movieTitle, functionTime, selectedSeat, price, onContinue }) => {
+const BookingSidePanel = ({ movieTitle, functionTime, selectedSeat, price, onContinue, status }) => {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -27,6 +27,7 @@ const BookingSidePanel = ({ movieTitle, functionTime, selectedSeat, price, onCon
         </div>
       </div>
       <div className={styles.cardFooter}>
+        {status && <p className={styles.statusMessage}>{status}</p>}
         <button 
           className={styles.button}
           onClick={onContinue}
