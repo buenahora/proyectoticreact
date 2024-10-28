@@ -3,11 +3,19 @@ import './Home.css'; // Importamos los estilos
 import { useState, useEffect } from 'react';
 import ContenedorPelicula from '../ContenedorPelicula/ContenedorPelicula.jsx';
 import { Link } from 'react-router-dom';
+import Pagination from '../Pagination/Pagination.jsx';
 
 function Home() {
 
   const [movies, setMovies] = useState([]);
-  const [genre, setGenre] = useState("");
+  const [moviesCurrent, setMoviesCurrent] = useState([]);
+  const [genre, setGenre] = useState("todos");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const postsPerPage = 6;
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = moviesCurrent.slice(indexOfFirstPost, indexOfLastPost);
 
 
   useEffect(() => {
@@ -17,11 +25,26 @@ function Home() {
       .catch(error => console.error('Error fetching movies:', error));
   }, []);
 
+  useEffect(() => {
+    console.log(genre)
+    if (genre === "todos") {
+      setMoviesCurrent(movies);
+    } else {
+      setMoviesCurrent(movies.filter(movie => genre === "" || movie.genre === genre));
+    }
+  }, [genre, movies]);
+
   const promotions = [
     { id: 1, title: "Family Package", description: "Get 20% off when you buy 4 or more tickets", code: "FAMILY20" },
     { id: 2, title: "Student Discount", description: "Students get 15% off with valid ID", code: "STUDENT15" },
     { id: 3, title: "Matinee Special", description: "All shows before 5 PM are $2 off", code: "MATINEE2" },
   ]
+
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
 
   return (
     <>
@@ -47,21 +70,25 @@ function Home() {
         <select 
         id="genere-select"
         onChange={(e) => setGenre(e.target.value)}>
-            <option value="">All Genres</option>
+            <option value="todos">All Genres</option>
+
+            
             {Array.from(new Set(movies.map(movie => movie.genre))).map(genre => (
               <option key={genre} value={genre}>{genre}</option>
             ))}
+            
           </select>
 
         <div className="movies-grid">
           {/* Reemplaza con tus imágenes o componentes */}
-          {movies
-            .filter(movie => genre === "" || movie.genre === genre)
-            .map(movie => (
+          {currentPosts.map(movie => (
               <ContenedorPelicula Name={movie.title} Genre={movie.genre} FrontPage={movie.frontPage} key ={movie.id} id={movie.id} movie={movie} />
             ))}
 
         </div>
+
+        <Pagination postsPerPage={6} length={moviesCurrent.length} handlePagination={handlePagination} currentPage={currentPage}/>
+
       </section>
 
       <section className="membership-section">
