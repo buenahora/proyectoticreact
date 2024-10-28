@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import styles from './Movie.module.css'
 import { useParams } from 'react-router-dom'
 import { MovieSharp } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 // This would typically come from an API or database
 const cinemas = [
@@ -25,11 +28,108 @@ const cinemas = [
   }
 ]
 
+
+
 export default function Movie() {
 
   let { movieId } = useParams();
 
   const [movie, setMovie] = useState({});
+  const [showtimes, setShowtimes] = useState([]);
+
+
+  
+// Structure of JSON object
+//   {
+//     "movie": {
+//         "id": 1,
+//         "title": "Inception",
+//         "genre": "Science Fiction",
+//         "duration": 148,
+//         "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+//         "trailer": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+//     },
+//     "room": {
+//         "numRoom": 1,
+//         "cinema": {
+//             "id": 1,
+//             "name": "Cinema Punta Carretas",
+//             "neighborhood": "Punta Carretas"
+//         }
+//     },
+//     "showtimes": [
+//         {
+//             "id": 35,
+//             "datetime": "2024-10-05T20:00:00",
+//             "cinema": {
+//                 "id": 2,
+//                 "name": "Cinema Ciudad Vieja",
+//                 "neighborhood": "Ciudad Vieja"
+//             },
+//             "room": {
+//                 "numRoom": 6,
+//                 "cinema": {
+//                     "id": 1,
+//                     "name": "Cinema Punta Carretas",
+//                     "neighborhood": "Punta Carretas"
+//                 }
+//             },
+//             "movie": {
+//                 "id": 1,
+//                 "title": "Inception",
+//                 "genre": "Science Fiction",
+//                 "duration": 148,
+//                 "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+//                 "trailer": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+//             }
+//         }
+//     ]
+// }
+  
+const [groupedShowtimes, setGroupedShowtimes] = useState({});
+
+useEffect(() => {
+  const grouped = showtimes.reduce((acc, showtime) => {
+    const cinemaName = showtime.cinema.name;
+    if (!acc[cinemaName]) {
+      acc[cinemaName] = [];
+    }
+    acc[cinemaName].push(showtime);
+    return acc;
+  }, {});
+
+  setGroupedShowtimes(grouped);
+}, [showtimes]);
+
+
+  useEffect(() => {
+
+    // Get today's date with the following format: 2024-10-05T20:00:00
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    // const day = today.getDate().toString().padStart(2, '0');
+    // const hours = today.getHours().toString().padStart(2, '0');
+    // const minutes = today.getMinutes().toString().padStart(2, '0');
+    // const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:00`;
+    // console.log(formattedDate);
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/function?date=2024-10-05T20:00:00&movieId=${movieId}`);
+        const data = await response.json();
+        setShowtimes(data);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [movieId]);
+
+  const navigate = useNavigate();
+
   
   function timeConvert(n) {
     var num = n;
@@ -56,6 +156,15 @@ export default function Movie() {
   }, [])
 
 // frontPage, duration, genre, id, synopsis, title, trailer
+
+  const handleClick = (functionId, cinemaId, dateTime) => {
+    console.log('Function ID:', functionId);
+    console.log('Cinema ID:', cinemaId);
+    console.log('Date and Time:', dateTime);
+    // Navigate to /reservation/:cinemaId/:functionId/:dateTime using the params
+    navigate(`/reservation/${cinemaId}/${functionId}/${dateTime}`);
+  }
+
 
   //Get props
   console.log(movie)
@@ -109,26 +218,32 @@ export default function Movie() {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Showtimes</h2>
         <div className={styles.cinemaGrid}>
-          {cinemas.map((cinema) => (
-            <div key={cinema.id} className={styles.cinemaCard}>
+          
+          {groupedShowtimes && Object.keys(groupedShowtimes).map((cinemaName) => (
+            <div key={cinemaName} className={styles.cinemaCard}>
               <div className={styles.cinemaHeader}>
-                <h3 className={styles.cinemaName}>{cinema.name}</h3>
+                <h3 className={styles.cinemaName}>{cinemaName}</h3>
                 <div className={styles.cinemaAddress}>
                   <span className={styles.icon}>📍</span>
-                  {cinema.address}
+                  {groupedShowtimes[cinemaName][0].cinema.neighborhood}
                 </div>
               </div>
               <div className={styles.cinemaContent}>
+
                 <div className={styles.showtimeList}>
-                  {cinema.showtimes.map((time, index) => (
-                    <button key={index} className={styles.showtimeButton}>
-                      {time}
+                  {groupedShowtimes[cinemaName].map((showtime, index) => (
+                    <button key={index} className={styles.showtimeButton} onClick={() => handleClick(showtime.id, showtime.cinema.id, showtime.datetime)}>
+                      {new Date(showtime.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {" - Room: "+showtime.room.numRoom}
                     </button>
                   ))}
                 </div>
+
               </div>
             </div>
           ))}
+
+
         </div>
       </div>
     </div>
