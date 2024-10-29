@@ -9,6 +9,7 @@ import NavBar from './components/NavBar/NavBar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Movie from './components/Movie/Movie.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import { useState } from 'react';
 
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -16,6 +17,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import ReservationSeats from './components/ReservationSeats/ReservationSeats.jsx';
 
 export default function App() {
+
+  const [usernameState, setUsernameState] = useState("")
 
   const darkTheme = createTheme({
     palette: {
@@ -28,15 +31,15 @@ export default function App() {
       <CssBaseline />
       <Router>
       <div className="App">
-      <NavBar />
+      <NavBar usernameState = {usernameState} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUsernameState={setUsernameState}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/movie/:movieId" element={<Movie />} />
           <Route path="/reservation/:cinemaId/:functionId/:dateTime" element={<ReservationSeats />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile setUsernameState={setUsernameState} usernameState={usernameState}/>} />
 
         </Routes>
         <Footer />

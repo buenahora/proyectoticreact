@@ -24,12 +24,44 @@
   margin: 0 auto;
 }
 
+.logOutButton {
+  border-radius: 5px;
+}
+
 .cardHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
   background-color: var(--color-secondary);
+
+}
+
+.logoutButton {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Hand cursor on hover */
+  font-size: 16px; /* Text size */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.logoutButton:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.logoutButton:active {
+  transform: translateY(1px); /* Slight push down effect when clicked */
+}
+
+.containerUserInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .avatar {
@@ -134,6 +166,8 @@
   margin-bottom: 0.25rem;
 }
 
+
+
 .cancelButton {
   background-color: var(--color-danger);
   color: var(--color-foreground);
@@ -159,7 +193,6 @@
 @media (min-width: 640px) {
   .cardHeader {
     flex-direction: row;
-    justify-content: flex-start;
   }
 
   .avatar {

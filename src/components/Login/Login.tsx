@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // import custom Hook useCookie
 import useCookie from '../../useCookie.js';
 
-export default function CinemaLogin() {
+export default function CinemaLogin({setUsernameState}) {
 
   const [email, setEmail] = useState(''); // Nuevo estado para el email
   const [password, setPassword] = useState('');
@@ -73,6 +73,9 @@ export default function CinemaLogin() {
         setUsername(email, 1);
         setUserId(data.userId, 1);
       }
+
+      setUsernameState(email);
+
 
       // Navigate to another page or show success message
 

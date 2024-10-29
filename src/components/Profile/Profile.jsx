@@ -3,13 +3,17 @@ import styles from './Profile.module.css'
 import { useEffect } from 'react';
 import axios from 'axios';
 import useCookie from '../../useCookie.js';
+import { useNavigate } from 'react-router-dom';
 
-export default function ProfilePage() {
+export default function ProfilePage({setUsernameState}) {
   const [userData, setUserData] = useState([]);
-  const { cookieValue: userId } = useCookie("userId");
-  const [reservations, setReservations] = useState([]);
+  const { cookieValue: userId, deleteCookie: deleteUserId } = useCookie("userId");
+  const { cookieValue: username, deleteCookie: deleteUsername } = useCookie("username");
 
+  const [reservations, setReservations] = useState([]);
   const [userIdState, setUserIdState] = useState(userId);
+
+  const navigate = useNavigate();
 
 
 useEffect(() => {
@@ -45,6 +49,7 @@ useEffect(() => {
 }, [userIdState]);
 
 
+
   const handleCancelReservation = (id) => {
 
     const deleteReservation = async (id) => {
@@ -76,6 +81,14 @@ useEffect(() => {
   };
 
 
+  const handleLogout = () => {
+    deleteUserId();
+    deleteUsername();
+    setUsernameState("");
+    navigate('/')
+  }
+
+
 //   id:21
 //   lastName: "prueba"
 //   mail: "prueba10@prueba.com"
@@ -86,14 +99,21 @@ return (
     <div className={styles.container}>
         <div className={styles.card}>
             <div className={styles.cardHeader}>
-                <div className={styles.avatar}>
-                    <img src="/profilepic.png" alt={userData.name + " " + userData.lastName} />
+                <div className={styles.containerUserInfo}>
+                    <div className={styles.avatar}>
+                        <img src="/profilepic.png" alt={userData.name + " " + userData.lastName} />
+                    </div>
+                    <div className={styles.userInfo}>
+                        <h1 className={styles.userName}>{userData.name + " " + userData.lastName}</h1>
+                        <p className={styles.userEmail}>{userData.mail}</p>
+                    </div>
                 </div>
-                <div className={styles.userInfo}>
-                    <h1 className={styles.userName}>{userData.name + " " + userData.lastName}</h1>
-                    <p className={styles.userEmail}>{userData.mail}</p>
-                </div>
+                    <div>
+                        <button className={styles.logoutButton} onClick={handleLogout}>Log Out</button>
+                    </div>
             </div>
+
+
             <div className={styles.cardContent}>
                 <h2 className={styles.sectionTitle}>Reservations</h2>
                 {reservations.length > 0 ? (

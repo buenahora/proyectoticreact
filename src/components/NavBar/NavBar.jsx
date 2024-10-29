@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; 
 import useCookie from '../../useCookie.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'
 
-const NavBar = () => {
-
-  let { cookieValue: username, setCookie: setUsername, deleteCookie: deleteUsername } = useCookie("username");
+const NavBar = ({usernameState}) => {
 
   return (
     <nav className="navbar">
@@ -17,7 +15,7 @@ const NavBar = () => {
       </Link>
 
       <div className="navbar-links">
-        {!username ? (
+        {!usernameState ? (
           <>
             <Link to="/login">
               <button>Log In</button>
@@ -28,7 +26,7 @@ const NavBar = () => {
           </>
         ) : (
           <div className="navbar-username">
-            <Link to={'/profile'}>{username}</Link>
+            <Link to={'/profile'}>{usernameState}</Link>
           </div>
         )}
       </div>
