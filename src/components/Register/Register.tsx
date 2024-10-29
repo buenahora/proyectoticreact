@@ -39,16 +39,22 @@ export default function CinemaRegister() {
       });
 
       if (!response.ok) {
+        console.log(response);
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Network response was not ok');
+        console.log(errorData);
+       setError(errorData.message || 'Network response was not ok');
+       return
       }
 
       const data = await response.json();
       
-      // console.log('Registration successful:', data);
-      // setError(data.response);
+      console.log('Registration successful:', data);
+      setError(data.message);
 
-      navigate('/login')
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
 
       // Navigate to another page or show success message
     } catch (error) {
@@ -87,6 +93,8 @@ export default function CinemaRegister() {
     // Para hashear la contraseña
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+
+    
     console.log("La passwd hasheada es " + hashedPassword);
 
 

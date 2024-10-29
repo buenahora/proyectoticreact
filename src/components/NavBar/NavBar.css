@@ -1,3 +1,5 @@
+
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -18,7 +20,16 @@
 
   .navbar-links {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
+  }
+
+  .navbar a {
+      color: white;
+      font-size: 16px;
+  }
+
+  .navbar-username {
+    color: black;
   }
   
   .navbar-logo {

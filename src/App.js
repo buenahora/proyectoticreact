@@ -8,6 +8,7 @@ import Reservation from './components/Reservation/Reservation.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Movie from './components/Movie/Movie.jsx';
+import Profile from './components/Profile/Profile.jsx';
 
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/movie/:movieId" element={<Movie />} />
           <Route path="/reservation/:cinemaId/:functionId/:dateTime" element={<ReservationSeats />} />
+          <Route path="/profile" element={<Profile />} />
 
         </Routes>
         <Footer />

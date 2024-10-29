@@ -1,7 +1,9 @@
 import React, { useState } from 'react'; 
 import './Login.css'; // This CSS now uses color variables
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
+
+// import custom Hook useCookie
+import useCookie from '../../useCookie.js';
 
 export default function CinemaLogin() {
 
@@ -9,6 +11,11 @@ export default function CinemaLogin() {
   const [password, setPassword] = useState('');
   const [hash, setHash] = useState('');
   const [error, setError] = useState('');
+
+  const { cookieValue: username, setCookie: setUsername, deleteCookie: deleteUsername } = useCookie("username");
+  const { cookieValue: userId, setCookie: setUserId, deleteCookie: deleteUserId } = useCookie("userId");
+
+  const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
 
@@ -46,18 +53,33 @@ export default function CinemaLogin() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Network response was not ok');
+        setError(errorData.message || 'Network response was not ok');
+        return
       }
 
-      await response.json();
+      console.log(response)
+      let data = await response.json();
       
-      // console.log('Registration successful:', data);
-      // setError(data.response);
+      // Save the username in a cookie
 
-      console.log("todo bien")
-      navigate('/')
+      console.log('Login successful:', data);
+      setError(data.message);
+
+      if (rememberMe) {
+        setUsername(email, 30);
+        setUserId(data.userId, 30);
+
+      } else {
+        setUsername(email, 1);
+        setUserId(data.userId, 1);
+      }
 
       // Navigate to another page or show success message
+
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+
     } catch (error) {
       console.error('There was a problem with the login:', error);
       setError("Wrong user or password");
@@ -74,12 +96,9 @@ export default function CinemaLogin() {
     e.preventDefault();
 
     // Para hashear la contraseña
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // const saltRounds = 10;
+    // const hashedPassword = await bcrypt.hash(password, saltRounds);
     setHash(password);
-
-    handleLogin()
-
   }
   
 
@@ -121,7 +140,11 @@ export default function CinemaLogin() {
           {error && <p className={"error"}>{error}</p>} {/* Mostrar error si hay */}
           <div className="remember-forgot">
             <label className="remember-me">
-              <input type="checkbox" /> Remember me
+              <input 
+              type="checkbox" 
+              checked={rememberMe} 
+              onChange={(e) => setRememberMe(e.target.checked)} 
+              /> Remember me
             </label>
             <a href="#" className="forgot-password">Forgot your password?</a>
           </div>

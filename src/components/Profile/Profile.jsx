@@ -1,0 +1,136 @@
+import { useState } from 'react'
+import styles from './Profile.module.css'
+import { useEffect } from 'react';
+import axios from 'axios';
+import useCookie from '../../useCookie.js';
+
+export default function ProfilePage() {
+  const [userData, setUserData] = useState([]);
+  const { cookieValue: userId } = useCookie("userId");
+  const [reservations, setReservations] = useState([]);
+
+  const [userIdState, setUserIdState] = useState(userId);
+
+
+useEffect(() => {
+    console.log(userId)
+    setUserIdState(userId);
+}, [userId]);
+
+
+useEffect(() => {
+    if (userIdState) {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/users/' + userIdState);
+                setUserData(response.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        const fetchReservations = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/reservation/' + userIdState);
+                console.log("Las reservas son:", response.data)
+                setReservations(response.data);
+            } catch (error) {
+                console.error('Error fetching reservations:', error);
+            }
+        };
+
+        fetchReservations();
+        fetchUserData();
+    }
+}, [userIdState]);
+
+
+  const handleCancelReservation = (id) => {
+
+    const deleteReservation = async (id) => {
+        console.log(id)
+        try {
+            const response = await axios.delete('http://localhost:3001/reservation/' + id);
+
+            console.log('Reservation deleted successfully');
+            setReservations(prevData => {
+                // Ensure prevData and prevData.reservations are defined
+                if (!prevData) {
+                  return prevData;
+                }
+
+                console.log("La prev data es: ", prevData)
+              
+                return prevData.filter(reservation => reservation.id !== id);
+            });
+            
+
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+
+    deleteReservation(id);
+
+
+  };
+
+
+//   id:21
+//   lastName: "prueba"
+//   mail: "prueba10@prueba.com"
+//   name: "prueba"
+//   password: "$2a$10$0MysR4RdPJ5Me/IE7JIyyOSXtfCBIRu5TmS2rc8vAcvDRcEozm5G2"
+
+return (
+    <div className={styles.container}>
+        <div className={styles.card}>
+            <div className={styles.cardHeader}>
+                <div className={styles.avatar}>
+                    <img src="/profilepic.png" alt={userData.name + " " + userData.lastName} />
+                </div>
+                <div className={styles.userInfo}>
+                    <h1 className={styles.userName}>{userData.name + " " + userData.lastName}</h1>
+                    <p className={styles.userEmail}>{userData.mail}</p>
+                </div>
+            </div>
+            <div className={styles.cardContent}>
+                <h2 className={styles.sectionTitle}>Reservations</h2>
+                {reservations.length > 0 ? (
+                    <ul className={styles.reservationsList}>
+                        {reservations.map((reservation) => (
+                            <li key={reservation.id} className={styles.reservationItem}>
+                                <div className={styles.reservationHeader}>
+                                    <div>
+                                        <h3 className={styles.movieTitle}>{reservation.function.movie.title}</h3>
+                                        <p className={styles.dateTime}>
+                                            {new Date(reservation.function.datetime).toLocaleString()}
+                                        </p>
+                                    </div>
+                                    <span className={styles.seatsBadge}>
+                                        1 Seat
+                                    </span>
+                                </div>
+                                <div className={styles.seatsList}>
+                                    <span className={styles.seatLabel}>Seats:</span>
+                                        <span className={styles.seatBadge}>
+                                            {`${String.fromCharCode(64 + reservation.seat.row)}${reservation.seat.columnR}`}
+                                        </span>
+                                </div>
+                                <button 
+                                    className={styles.cancelButton}
+                                    onClick={() => handleCancelReservation(reservation.id)}
+                                >
+                                    Cancel Reservation
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No reservations</p>
+                )}
+            </div>
+        </div>
+    </div>
+)
+}

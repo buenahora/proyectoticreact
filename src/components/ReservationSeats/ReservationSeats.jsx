@@ -5,10 +5,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BookingSidePanel from '../BookingSidePanel/BookingSidePanel.jsx';
 import styles from './ReservationSeats.module.css';
-
+import useCookie from '../../useCookie.js';
+import { useNavigate } from 'react-router-dom';
 
 const ReservationSeats = () => {
     let { functionId, cinemaId, dateTime } = useParams();
+    const { cookieValue: userId } = useCookie("userId");
+
 
     const [seats, setSeats] = useState([]);
     const [numRoom, setNumRoom] = useState(null);
@@ -16,6 +19,24 @@ const ReservationSeats = () => {
     const [status, setStatus] = useState("");
 
     const [selectedSeat, setSelectedSeat] = useState(null);
+    const [userIdState, setUserIdState] = useState(userId);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!userId) {
+                console.log("userId is null, redirecting to login");
+                navigate('/login');
+            } else {
+                setUserIdState(userId);
+            }
+        }, 1000); // Wait for 2 seconds before checking userId
+
+        return () => clearTimeout(timer); // Cleanup the timer on component unmount
+    }, [userId, navigate]);
+
+    // Removed redundant useEffect
     
     const handleContinue = () => {
 
@@ -35,7 +56,7 @@ const ReservationSeats = () => {
                     "numRoom": numRoom.toString(),
                     "seatColumn": col.toString(),
                     "seatRow": row.toString(),
-                    "userId": "2"
+                    "userId": userIdState
                 });
 
                 const requestOptions = {
