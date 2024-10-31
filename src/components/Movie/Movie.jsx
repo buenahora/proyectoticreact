@@ -89,7 +89,12 @@ export default function Movie() {
 const [groupedShowtimes, setGroupedShowtimes] = useState({});
 
 useEffect(() => {
-  const grouped = showtimes.reduce((acc, showtime) => {
+
+    if (!showtimes || showtimes.length === 0) {
+      return;
+    }
+
+    const grouped = showtimes.reduce((acc, showtime) => {
     const cinemaName = showtime.cinema.name;
     if (!acc[cinemaName]) {
       acc[cinemaName] = [];

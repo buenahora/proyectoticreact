@@ -15,9 +15,9 @@ for (let i = 1; i <= Math.ceil(length / postsPerPage); i++) {
 return (
 
     <div className='pagination'>
-        <ul class="pagination__list">
+        <ul className="pagination__list">
             {paginationNumbers.map((pageNumber) => (
-                <li class={pageNumber == currentPage ? "pagination__link--active" : "pagination__link"} aria-label={"Go to page"+pageNumber} key={pageNumber} onClick={() => handlePagination(pageNumber)} numero={pageNumber}> {pageNumber} </li>
+                <li className={pageNumber == currentPage ? "pagination__link--active" : "pagination__link"} aria-label={"Go to page"+pageNumber} key={pageNumber} onClick={() => handlePagination(pageNumber)} numero={pageNumber}> {pageNumber} </li>
             ))}
         </ul>
 

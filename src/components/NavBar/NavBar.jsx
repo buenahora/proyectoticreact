@@ -4,7 +4,19 @@ import './NavBar.css';
 import useCookie from '../../useCookie.js';
 import { useEffect, useState } from 'react'
 
-const NavBar = ({usernameState}) => {
+const NavBar = ({usernameState, setUsernameState}) => {
+
+  const { cookieValue: usernameCookie, deleteCookie: deleteUsername } = useCookie("username");
+
+  useEffect(() => {
+    console.log('cookie', usernameCookie)
+    console.log('usernameState', usernameState)
+
+    if(usernameCookie !== "") {
+      setUsernameState(usernameCookie);
+    }
+
+  }, [usernameState, usernameCookie, setUsernameState])
 
   return (
     <nav className="navbar">

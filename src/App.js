@@ -31,7 +31,7 @@ export default function App() {
       <CssBaseline />
       <Router>
       <div className="App">
-      <NavBar usernameState = {usernameState} />
+      <NavBar usernameState = {usernameState} setUsernameState={setUsernameState}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setUsernameState={setUsernameState}/>} />

@@ -85,7 +85,9 @@ useEffect(() => {
     deleteUserId();
     deleteUsername();
     setUsernameState("");
-    navigate('/')
+    setUserData([]);
+    setReservations([]);
+    navigate('/');
   }
 
 
