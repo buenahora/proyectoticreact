@@ -105,7 +105,7 @@ export default function Reservation() {
       </div>
 
       {/* Muestra la película seleccionada */}
-      {selectedMovie && <p>Película seleccionada: {selectedMovie}</p>}
+      {selectedMovie && <p>Selected movie: {selectedMovie}</p>}
 
       <Schedule />
 
