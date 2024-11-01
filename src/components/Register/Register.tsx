@@ -24,7 +24,7 @@ export default function CinemaRegister() {
       password: hash,
     }))
     try {
-      const response = await fetch('http://localhost:3001/users', {
+      const response = await fetch('https://proyecto-tic-equipo2.onrender.com/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

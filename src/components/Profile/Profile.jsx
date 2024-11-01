@@ -26,7 +26,7 @@ useEffect(() => {
     if (userIdState) {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/users/' + userIdState);
+                const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/users/' + userIdState);
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -35,7 +35,7 @@ useEffect(() => {
 
         const fetchReservations = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/reservation/' + userIdState);
+                const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/reservation/' + userIdState);
                 console.log("Las reservas son:", response.data)
                 setReservations(response.data);
             } catch (error) {
@@ -55,7 +55,7 @@ useEffect(() => {
     const deleteReservation = async (id) => {
         console.log(id)
         try {
-            const response = await axios.delete('http://localhost:3001/reservation/' + id);
+            const response = await axios.delete('https://proyecto-tic-equipo2.onrender.com/reservation/' + id);
 
             console.log('Reservation deleted successfully');
             setReservations(prevData => {

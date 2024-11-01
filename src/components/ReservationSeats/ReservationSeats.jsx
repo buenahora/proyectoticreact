@@ -66,7 +66,7 @@ const ReservationSeats = () => {
                     redirect: "follow"
                   };
     
-                fetch("http://localhost:3001/reservation", requestOptions)
+                fetch("https://proyecto-tic-equipo2.onrender.com/reservation", requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
                     setSelectedSeat(null)
@@ -91,7 +91,7 @@ const ReservationSeats = () => {
 
     const fetchSeats = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/seats`, {
+            const response = await axios.get(`https://proyecto-tic-equipo2.onrender.com/seats`, {
                 params: {
                     numRoom: numRoom,
                     cinemaId,
@@ -118,7 +118,7 @@ const ReservationSeats = () => {
         const fetchMovieData = async () => {
 
             try {
-                const response = await axios.get(`http://localhost:3001/function/`+functionId);
+                const response = await axios.get(`https://proyecto-tic-equipo2.onrender.com/function/`+functionId);
 
                 console.log(response.data)
                 
