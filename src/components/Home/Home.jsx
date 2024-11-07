@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import ContenedorPelicula from '../ContenedorPelicula/ContenedorPelicula.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination.jsx';
+import axios from 'axios';
 
 function Home() {
 
