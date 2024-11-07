@@ -22,7 +22,13 @@ function Home() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/movies');
+        const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/movies', {
+          withCredentials: true, // This is the key part
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+
         setMovies(response.data);
       } catch (error) {
         console.error('Error fetching movies:', error);
