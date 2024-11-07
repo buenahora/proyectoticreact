@@ -19,10 +19,16 @@ function Home() {
 
 
   useEffect(() => {
-    fetch('https://proyecto-tic-equipo2.onrender.com/movies')
-      .then(response => response.json())
-      .then(data => setMovies(data))
-      .catch(error => console.error('Error fetching movies:', error));
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/movies');
+        setMovies(response.data);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchMovies();
   }, []);
 
   useEffect(() => {
