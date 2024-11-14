@@ -22,7 +22,7 @@ function Home() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/movies', {
+        const response = await axios.get('https://proyecto-tic-equipo2east.onrender.com/movies', {
           headers: {
               'Content-Type': 'application/json'
           }

@@ -39,7 +39,7 @@ export default function CinemaLogin({setUsernameState}) {
 
 
     try {
-      const response = await fetch('https://proyecto-tic-equipo2.onrender.com/users/login', {
+      const response = await fetch('https://proyecto-tic-equipo2east.onrender.com/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
