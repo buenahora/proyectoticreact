@@ -94,14 +94,19 @@ useEffect(() => {
       return;
     }
 
-    const grouped = showtimes.reduce((acc, showtime) => {
+    if (showtimes.length === 1) {
+      setGroupedShowtimes({ [showtimes[0].cinema.name]: showtimes });
+      return;
+    }
+
+    const grouped = Array.isArray(showtimes) ? showtimes.reduce((acc, showtime) => {
     const cinemaName = showtime.cinema.name;
     if (!acc[cinemaName]) {
       acc[cinemaName] = [];
     }
     acc[cinemaName].push(showtime);
     return acc;
-  }, {});
+  }, {}) : {};
 
   setGroupedShowtimes(grouped);
 }, [showtimes]);
@@ -121,7 +126,7 @@ useEffect(() => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://proyecto-tic-equipo2east.onrender.com/function?date=2024-10-05T20:00:00&movieId=${movieId}`);
+        const response = await fetch(`https://proyecto-tic-equipo2.onrender.com/function?date=2024-10-05T20:00:00&movieId=${movieId}`);
         const data = await response.json();
         setShowtimes(data);
 
@@ -146,7 +151,7 @@ useEffect(() => {
     }
 
   useEffect(() => {
-    fetch('https://proyecto-tic-equipo2east.onrender.com/movies/'+movieId)
+    fetch('https://proyecto-tic-equipo2.onrender.com/movies/'+movieId)
       .then(response => response.json())
       .then(data => {
         let algo = data.trailer.replace("watch?v=", "embed/")
@@ -174,7 +179,9 @@ useEffect(() => {
   //Get props
   console.log(movie)
   return (
-    <div className={styles.container}>
+
+    movie && movie.title && movie.duration ? (
+      <div className={styles.container}>
       <div className={styles.grid}>
         <div className={styles.infoSection}>
           <h1 className={styles.title}>{movie.title}</h1>
@@ -252,5 +259,8 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    ) : <p>Loading...</p>
+
+    
   )
 }

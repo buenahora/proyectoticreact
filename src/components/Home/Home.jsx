@@ -67,7 +67,7 @@ function Home() {
       <div className='data'>
       <h1 className="App-title">WTF</h1>
       <h2 className="App-subtitle">What The Fun Cinema</h2>
-        <h1>Enoy the latest movies and reserve your seat!</h1>
+        <h1>Enjoy the latest movies and reserve your seat!</h1>
         <p>Buy your ticket now</p>
         {/* <Link to="/reservation">
         <button className="reserve-button">Book your seat now</button>
