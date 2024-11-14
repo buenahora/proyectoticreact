@@ -23,7 +23,6 @@ function Home() {
     const fetchMovies = async () => {
       try {
         const response = await axios.get('https://proyecto-tic-equipo2.onrender.com/movies', {
-          withCredentials: true, // This is the key part
           headers: {
               'Content-Type': 'application/json'
           }
