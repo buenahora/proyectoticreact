@@ -98,6 +98,7 @@ useEffect(() => {
 //   password: "$2a$10$0MysR4RdPJ5Me/IE7JIyyOSXtfCBIRu5TmS2rc8vAcvDRcEozm5G2"
 
 return (
+    userData.length === 0 ? <p>Loading...</p> :
     <div className={styles.container}>
         <div className={styles.card}>
             <div className={styles.cardHeader}>

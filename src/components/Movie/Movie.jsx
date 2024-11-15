@@ -126,7 +126,7 @@ useEffect(() => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://proyecto-tic-equipo2.onrender.com/function?date=2024-10-05T20:00:00&movieId=${movieId}`);
+        const response = await fetch(`https://proyecto-tic-equipo2east.onrender.com/function?date=2024-10-05T20:00:00&movieId=${movieId}`);
         const data = await response.json();
         setShowtimes(data);
 
