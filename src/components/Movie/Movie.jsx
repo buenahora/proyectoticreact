@@ -151,7 +151,7 @@ useEffect(() => {
     }
 
   useEffect(() => {
-    fetch('https://proyecto-tic-equipo2.onrender.com/movies/'+movieId)
+    fetch('https://proyecto-tic-equipo2east.onrender.com/movies/'+movieId)
       .then(response => response.json())
       .then(data => {
         let algo = data.trailer.replace("watch?v=", "embed/")
